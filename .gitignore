@@ -1,0 +1,10 @@
+node_modules
+dist
+.env
+globalConfig
+coverage
+data/postgres-data
+data/tmp
+.DS_Store
+package-lock.json
+yarn-error.log

@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  bigdata:
+    build:
+      context: .
+      dockerfile: ./devops/Dockerfile
+    image: node
+    container_name: bigdata
+    restart: always
+    env_file: .env
+    environment:
+      TZ: America/Sao_Paulo
+    ports:
+      - '3010:3010'
+    command: npm run start
+    volumes:
+      - .:/home/node/app
+      - /home/node/app/node_modules
+    depends_on:
+      - bigdata-postgres
+
+  bigdata-postgres:
+    image: postgres
+    container_name: bigdata-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: bigdata
+      TZ: America/Sao_Paulo
+    logging:
+      options:
+        max-size: 10m
+        max-file: '3'
+    ports:
+      - '5441:5432'
+    volumes:
+      - ./data/postgres-data:/var/lib/postgresql/data:z
+volumes:
+  postgres-data:
