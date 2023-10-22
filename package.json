@@ -57,12 +57,12 @@
     "test:unit": "npm test -- --silent=false --watch -c jest-unit-config.js",
     "migrate": "npx knex --env bigdataConnection migrate:latest",
     "seed": "npx knex --env bigdataConnection seed:run",
-    "docker:seed": "docker exec -it clipp360-nfse npx knex --env bigdataConnection seed:run",
-    "docker:migrate": "docker exec -it clipp360-nfse npx knex --env bigdataConnection migrate:latest",
-    "docker:rollback": "docker exec -it clipp360-nfse npx knex --env bigdataConnection migrate:rollback",
+    "docker:seed": "docker exec -it bigdata npx knex --env bigdataConnection seed:run",
+    "docker:migrate": "docker exec -it bigdata npx knex --env bigdataConnection migrate:latest",
+    "docker:rollback": "docker exec -it bigdata npx knex --env bigdataConnection migrate:rollback",
     "reset:microservice": "docker-compose down -v && sudo rm -rf data/ && docker-compose build && docker-compose up -d && yarn docker:migrate && yarn docker:seed",
     "reset:db": "yarn docker:rollback && yarn docker:migrate && yarn docker:seed",
-    "db-conn:local": "docker exec -it clipp360-nfse-postgres psql 'port=5432 dbname=nfse user=postgres password=postgres'",
+    "db-conn:local": "docker exec -it bigdata-postgres psql 'port=5432 dbname=bigdata user=postgres password=postgres'",
     "lint": "eslint . --ext .ts"
   }
 }
