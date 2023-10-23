@@ -5,7 +5,7 @@ try {
     const app = (await import('./config/app')).default;
     app.listen(environment.PORT, () => {
       console.log(
-        `Microservice of NFS-e running at port ${environment.PORT} in environment ${environment.ENVIRONMENT} 😎`,
+        `Microservice running at port ${environment.PORT} in environment ${environment.ENVIRONMENT} 😎`,
       );
     });
   })();
